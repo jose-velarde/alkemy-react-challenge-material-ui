@@ -12,7 +12,7 @@ import "@fontsource/roboto";
 // dark mode toggle resets everything
 function App() {
     const [mode, setMode] = useState("light");
-    const [user, setUser] = useState("admin");
+    const [user, setUser] = useState("");
     const [navHeight, setNavHeight] = useState(0);
     const [team, setTeam] = useState([]);
     const [results, setResults] = useState();
@@ -82,7 +82,7 @@ function App() {
                         setNavHeight={setNavHeight}
                         mode={mode}
                         setMode={handleSetMode}
-						team={team}
+						team={team	}
                     />
                     <main>
                         <ThemeProvider theme={teamTheme}>

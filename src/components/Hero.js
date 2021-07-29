@@ -48,7 +48,7 @@ function Hero(props) {
                         ) : (
                             <LinearProgress
                                 variant="determinate"
-                                value={stat[1]}
+                                value={Number(stat[1])}
                             />
                         )}
                     </Grid>
@@ -74,7 +74,7 @@ function Hero(props) {
                 alt={props.hero.name}
                 style={{
                     borderRadius: "10px",
-                    maxHeight: `calc(100vh - ${props.navHeight}px - ${props.searchBarHeight}px)`,
+					minHeight: ['auto','auto',`calc(100vh - ${props.navHeight}px - ${props.searchBarHeight}px)`],
                 }}
             />
             <ImageListItemBar

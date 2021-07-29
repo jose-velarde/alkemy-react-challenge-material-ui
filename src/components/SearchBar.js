@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import axios from "axios";
 
 // vheight get messed up when helper text shows up
+// can't perform a React state update on an unmounted component error.
 function SearchBar(props) {
     const reference = useRef();
 
@@ -28,7 +29,7 @@ function SearchBar(props) {
                 "https://superheroapi.com/api.php/10226669230223430/search/" +
                     values.name
             );
-            const searchResults = await response.data.results;
+            const searchResults = response.data.results;
             props.setResults(searchResults);
         } catch (err) {
             console.error(err);

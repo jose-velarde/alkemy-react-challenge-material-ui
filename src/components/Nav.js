@@ -62,7 +62,7 @@ function Nav(props) {
 		}
 
         return [notifications, (
-            <Grid direction="column">
+            <Grid container direction="column">
                 <Typography>
                     {badHeroes !== 3 && goodHeroes !== 3
                         ? "No notifications"
