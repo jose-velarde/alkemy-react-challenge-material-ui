@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/login"
+  to = "http://challenge-react.alkemy.org/"
+  status = 200
+  force = true
