@@ -16,7 +16,7 @@ function SearchBar(props) {
             props.setSearchBarHeight(reference.current.offsetHeight);
         }
     }, [props]);
-
+    // move to services.js
     const LoginSchema = Yup.object().shape({
         name: Yup.string()
             .min(1, "Search must be 1 characters at minimum")

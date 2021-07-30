@@ -9,7 +9,8 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import "@fontsource/roboto";
 
-// dark mode toggle resets everything
+// dark mode toggle resets everything, fixed by moving all states to parent
+// all the child components were prob re-rendered on parent state change
 function App() {
     const [mode, setMode] = useState("light");
     const [user, setUser] = useState("");
@@ -82,26 +83,26 @@ function App() {
                         setNavHeight={setNavHeight}
                         mode={mode}
                         setMode={handleSetMode}
-						team={team	}
+                        team={team}
                     />
                     <main>
                         <ThemeProvider theme={teamTheme}>
-                        <Route
-                            path="/"
-                            exact
-                            component={() => (
-                                <Home
-                                    user={user}
-                                    navHeight={navHeight}
-                                    team={team}
-                                    setTeam={setTeam}
-									results={results}
-									setResults={setResults}
-									searchBarHeight={searchBarHeight}
-									setSearchBarHeight={setSearchBarHeight}
-                                />
-                            )}
-                        />
+                            <Route
+                                path="/"
+                                exact
+                                component={() => (
+                                    <Home
+                                        user={user}
+                                        navHeight={navHeight}
+                                        team={team}
+                                        setTeam={setTeam}
+                                        results={results}
+                                        setResults={setResults}
+                                        searchBarHeight={searchBarHeight}
+                                        setSearchBarHeight={setSearchBarHeight}
+                                    />
+                                )}
+                            />
                         </ThemeProvider>
                         <ThemeProvider theme={searchTheme}>
                             <Route

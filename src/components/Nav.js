@@ -14,6 +14,7 @@ import {
 import { Brightness3, Brightness7, Notifications } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
+// lazy notifications, should prob implement a state over add to team in search results
 function Nav(props) {
     const reference = useRef();
     const [anchorEl, setAnchorEl] = useState(null);
@@ -40,7 +41,7 @@ function Nav(props) {
     const setNotificationsContent = () => {
         let goodHeroes = 0;
         let badHeroes = 0;
-		let notifications = 0;
+        let notifications = 0;
 
         props.team.forEach((hero) => {
             if (hero.biography.alignment === "good") {
@@ -53,15 +54,16 @@ function Nav(props) {
 
         if (goodHeroes === 3) {
             notifications += 1;
-        } 
-		if (badHeroes === 3 ){
-			notifications += 1;
-		}
-		if (badHeroes !== 3 && goodHeroes !== 3){
-			notifications = 0;
-		}
+        }
+        if (badHeroes === 3) {
+            notifications += 1;
+        }
+        if (badHeroes !== 3 && goodHeroes !== 3) {
+            notifications = 0;
+        }
 
-        return [notifications, (
+        return [
+            notifications,
             <Grid container direction="column">
                 <Typography>
                     {badHeroes !== 3 && goodHeroes !== 3
@@ -74,10 +76,9 @@ function Nav(props) {
                 <Typography>
                     {badHeroes === 3 ? "3 Evil Heroes on team" : null}
                 </Typography>
-            </Grid>
-        )];
+            </Grid>,
+        ];
     };
-
 
     const [notifications, notificationsContent] = setNotificationsContent();
 

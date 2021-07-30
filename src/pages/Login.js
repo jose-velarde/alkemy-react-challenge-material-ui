@@ -5,6 +5,7 @@ import LoginForm from "../components/LoginForm";
 import bgImage from "../images/bgImage.png";
 import { styled } from "@material-ui/core/styles";
 
+// move to styled components js file
 const TransparentPaper = styled(Paper)(({ theme }) => ({
     opacity: "90%",
 }));

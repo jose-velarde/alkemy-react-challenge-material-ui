@@ -3,8 +3,11 @@ import { Avatar, Grid, ImageListItemBar, IconButton } from "@material-ui/core";
 
 import { AddCircle } from "@material-ui/icons";
 
+// window scroll still activated is still activated during horizontal scroll
+// scroll position resets on add to team
 function SearchResults(props) {
-    // handle horizontal scroll, window scroll still activated
+    const scrollRef = useRef(null);
+
     const onWheel = (e) => {
         if (window.innerWidth < 900) {
             const container = scrollRef.current;
@@ -17,8 +20,6 @@ function SearchResults(props) {
         }
     };
 
-    const scrollRef = useRef(null);
-    // handle add hero, scroll position reset on add to team
     const handleClick = (json) => {
         let goodHeroes = 0;
         let badHeroes = 0;
@@ -37,8 +38,7 @@ function SearchResults(props) {
             return 0;
         });
 
-        if (repeatedHero) {  
-			
+        if (repeatedHero) {
             return;
         }
 

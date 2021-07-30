@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import { Cancel, Info } from "@material-ui/icons";
 
+// click on more information messes up card size, prob the animation.
 function Hero(props) {
     const [checked, setChecked] = useState(false);
 
@@ -56,6 +57,7 @@ function Hero(props) {
             );
         });
     };
+
     const setAlignment = (alignment) => {
         if (alignment === "good") {
             return "Good";
@@ -67,14 +69,22 @@ function Hero(props) {
             return "Unknown";
         }
     };
+
     return (
-        <ImageListItem key={props.hero.id}>
+        <ImageListItem
+            key={props.hero.id}
+            sx={{ marginX: "2px", marginBottom: "5px" }}
+        >
             <img
                 srcSet={props.hero.image.url}
                 alt={props.hero.name}
                 style={{
                     borderRadius: "10px",
-					minHeight: ['auto','auto',`calc(100vh - ${props.navHeight}px - ${props.searchBarHeight}px)`],
+                    minHeight: [
+                        "auto",
+                        "auto",
+                        `calc(100vh - ${props.navHeight}px - ${props.searchBarHeight}px)`,
+                    ],
                 }}
             />
             <ImageListItemBar

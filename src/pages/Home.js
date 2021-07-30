@@ -9,7 +9,6 @@ import heroImage from "../images/hero.png";
 import { Link } from "react-router-dom";
 
 function Home(props) {
-
     const handleRemove = (hero) => {
         props.setTeam(
             props.team.filter(function (rem) {
@@ -76,7 +75,9 @@ function Home(props) {
                                     <Grid item xs={12}>
                                         <SearchResults
                                             navHeight={props.navHeight}
-                                            searchBarHeight={props.searchBarHeight}
+                                            searchBarHeight={
+                                                props.searchBarHeight
+                                            }
                                             results={props.results}
                                             team={props.team}
                                             setTeam={props.setTeam}

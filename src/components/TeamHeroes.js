@@ -21,12 +21,12 @@ function TeamHeroes(props) {
             }}
         >
             {props.team.map((hero) => (
-					<Hero
-						hero={hero}
-						handleRemove={props.handleRemove}
-						navHeight={props.navHeight}
-						searchBarHeight={props.searchBarHeight}
-					/>
+                <Hero
+                    hero={hero}
+                    handleRemove={props.handleRemove}
+                    navHeight={props.navHeight}
+                    searchBarHeight={props.searchBarHeight}
+                />
             ))}
         </ImageList>
     ) : null;

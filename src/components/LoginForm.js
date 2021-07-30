@@ -23,7 +23,7 @@ import axios from "axios";
 function LoginForm(props) {
     const [redirect, setRedirect] = useState(false);
     const [loginError, setLoginError] = useState(false);
-
+    // move to services.js
     const LoginSchema = Yup.object().shape({
         email: Yup.string()
             .email("Invalid email address format")

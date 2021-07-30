@@ -1,8 +1,28 @@
-import React from "react";
-import { Grid, Paper, Typography, Box } from "@material-ui/core";
+import React, { useState } from "react";
+import {
+    Grid,
+    Paper,
+    Typography,
+    Box,
+    Button,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogActions,
+    Divider,
+    LinearProgress,
+} from "@material-ui/core";
 import { Cancel, Info, AddCircle } from "@material-ui/icons";
 
 function TeamInfo(props) {
+    const [open, setOpen] = useState(false);
+    const handleShowDialog = () => {
+        setOpen(true);
+    };
+    const handleHideDialog = () => {
+        setOpen(false);
+    };
+
     const castToNumber = (weightOrHeight) => {
         let number = weightOrHeight.replace(/\s[a-z]+|,/gi, "");
         if (number === "null") {
@@ -34,7 +54,7 @@ function TeamInfo(props) {
         });
 
         sorted_stats = sorted_stats.reverse();
-        return sorted_stats[0];
+        return sorted_stats;
     };
 
     const data = (props) => {
@@ -71,7 +91,7 @@ function TeamInfo(props) {
         });
 
         let highestStat = sortStats(statList);
-        highestStat = [highestStat[0], highestStat[1]];
+        // highestStat = [highestStat[0], highestStat[1]];
         height = ["Height", Math.floor(height / props.team.length)];
         weight = ["Weight", Math.floor(weight / props.team.length)];
 
@@ -171,29 +191,94 @@ function TeamInfo(props) {
         <Paper
             elevation={2}
             sx={{
-                minHeight: `calc(${props.searchBarHeight}px - 8px - 16px)`,
-                marginBottom: "8px",
-                marginTop: "16px",
+                // minHeight: `calc(${props.searchBarHeight}px - 8px - 16px)`,
+                marginY: "8px",
+                marginX: "4px",
                 // background: `url(${heroImage}) no-repeat center center`,
                 position: "relative",
                 backgroundColor: "rgba(0,0,0,.8)",
                 color: "#fff",
             }}
         >
-            <Grid container px={2}>
-                <Grid item xs={12}>
-                    <Typography variant="h6" color="#fff">
-                        {highestStat[0]} Team!
+            <Grid container px={2} flexDirection="column">
+                <Grid item sx={{ display: "flex", justifyContent: "center" }}>
+                    <Typography
+                        variant="h6"
+                        color="#fff"
+                        sx={{ display: "flex", alignItems: "center" }}
+                    >
+                        {highestStat[0][0]} Team!
                     </Typography>
                 </Grid>
-                <Grid item flexGrow={1}>
-                    <Typography variant="body2" color="#fff">
-                        Average Weight: {weight[1]} kg.
-                    </Typography>
-                </Grid>
-                <Grid item flexGrow={9}>
-                    <Typography variant="body2" color="#fff">
-                        Average Height: {height[1]} cm.
+                <Grid item sx={{ display: "flex", justifyContent: "center" }}>
+                    <Typography
+                        variant="body2"
+                        color="#fff"
+                        sx={{ display: "flex", alignItems: "center" }}
+                    >
+                        Click here for more{" "}
+                        <Button size="small" onClick={handleShowDialog}>
+                            details
+                        </Button>
+                        <Dialog
+                            open={open}
+                            onClose={handleHideDialog}
+                            fullWidth={true}
+                            sx={{ margin: "0 auto" }}
+                        >
+                            <DialogTitle>Team Stats</DialogTitle>
+                            <Divider />
+                            <DialogContent>
+                                {highestStat.map((stat, index) => {
+                                    return (
+                                        <Grid
+                                            container
+                                            key={"stat" + index}
+                                            mb={"2px"}
+                                        >
+                                            <Grid item xs={4}>
+                                                {stat[0]}
+                                            </Grid>
+                                            <Grid
+                                                item
+                                                flexGrow={1}
+                                                alignSelf="center"
+                                            >
+                                                <LinearProgress
+                                                    variant="determinate"
+                                                    value={Math.floor(
+                                                        stat[1] /
+                                                            props.team.length
+                                                    )}
+                                                />
+                                            </Grid>
+                                        </Grid>
+                                    );
+                                })}
+                                <Grid container mb={"2px"}>
+                                    <Grid item xs={4}>
+                                        {weight[0]}
+                                    </Grid>
+                                    <Grid item flexGrow={1}>
+                                        {weight[1]}
+                                    </Grid>
+                                </Grid>
+                                <Grid container mb={"2px"}>
+                                    <Grid item xs={4}>
+                                        {height[0]}
+                                    </Grid>
+                                    <Grid item flexGrow={1}>
+                                        {height[1]}
+                                    </Grid>
+                                </Grid>
+                            </DialogContent>
+                            <Divider />
+                            <DialogActions>
+                                <Button autoFocus onClick={handleHideDialog}>
+                                    Close
+                                </Button>
+                            </DialogActions>
+                        </Dialog>
                     </Typography>
                 </Grid>
             </Grid>
