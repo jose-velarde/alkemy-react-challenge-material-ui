@@ -52,9 +52,16 @@ function LoginForm(props) {
     };
 
     if (redirect) {
+		props.setUser("admin");
         return <Redirect to="/" />;
     }
 
+	const bypassLogin = () => {
+		localStorage.setItem("token", "login bypassed");
+		setLoginError(false);
+		setRedirect(true);
+		
+	}
     return (
         <Formik
             initialValues={{ email: "", password: "" }}
@@ -166,6 +173,25 @@ function LoginForm(props) {
                                     {isSubmitting ? "Loading..." : "Submit"}
                                 </Button>
                             </Grid>
+                            <Grid
+                                item
+                                xs={12}
+                                md={12}
+								mt={1}
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                }}
+                            >
+                                <Button
+                                    color="error"
+                                    variant="contained"
+									onClick={bypassLogin}
+								>
+                                    Bypass Login
+                                </Button>
+                            </Grid>
+
                             <Grid
                                 item
                                 xs={12}
