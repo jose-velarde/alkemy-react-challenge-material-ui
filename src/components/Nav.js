@@ -148,7 +148,7 @@ function Nav(props) {
                             sx={{ mr: 2 }}
                             onClick={props.setMode}
                         >
-                            {props.mode ? <Brightness3 /> : <Brightness7 />}
+                            {props.mode === 'light' ? <Brightness3 /> : <Brightness7 />}
                         </IconButton>
                         <Link
                             to="/"
